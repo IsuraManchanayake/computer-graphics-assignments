@@ -2,7 +2,7 @@
 
 #include "sierpinskitriangle.h"
 #include "ui_sierpinskitriangle.h"
-#include "util.h"
+#include "utils.h"
 
 SierpinskiTriangle::SierpinskiTriangle(QWidget *parent) :
     QMainWindow(parent),

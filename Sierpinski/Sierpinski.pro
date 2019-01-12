@@ -28,18 +28,35 @@ SOURCES += \
         main.cpp \
         sierpinskitriangle.cpp \
     sierpinskisquare.cpp \
-    util.cpp
 
 HEADERS += \
         sierpinskitriangle.h \
-    util.h \
     sierpinskisquare.h
 
 FORMS += \
         sierpinskitriangle.ui \
     sierpinskisquare.ui
 
+Release:DESTDIR = ../build/release
+Release:OBJECTS_DIR = ../build/release/.obj
+Release:MOC_DIR = ../build/release/.moc
+Release:RCC_DIR = ../build/release/.rcc
+Release:UI_DIR = ../build/release/.ui
+
+Debug:DESTDIR = ../build/debug
+Debug:OBJECTS_DIR = ../build/debug/.obj
+Debug:MOC_DIR = ../build/debug/.moc
+Debug:RCC_DIR = ../build/debug/.rcc
+Debug:UI_DIR = ../build/debug/.ui
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build/release/ -lcg-utils
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build/debug/ -lcg-utils
+else:unix: LIBS += -L$$PWD/../build/ -lcg-utils
+
+INCLUDEPATH += $$PWD/../CGUtils
+DEPENDPATH += $$PWD/../build/debug

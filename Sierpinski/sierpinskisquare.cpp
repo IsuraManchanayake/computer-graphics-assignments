@@ -2,7 +2,7 @@
 
 #include "sierpinskisquare.h"
 #include "ui_sierpinskisquare.h"
-#include "util.h"
+#include "utils.h"
 
 SierpinskiSquare::SierpinskiSquare(QWidget *parent) :
     QMainWindow(parent),

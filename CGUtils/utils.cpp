@@ -1,7 +1,8 @@
-#include "util.h"
+#include "utils.h"
 
 #include <vector>
 #include <cmath>
+#include <algorithm>
 
 #include <QRandomGenerator>
 

@@ -1,6 +1,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include "cg-utils_global.h"
+
 #include <cstddef>
 #include <ostream>
 #include <cmath>
@@ -9,7 +11,7 @@
 #include <type_traits>
 
 template<size_t N>
-struct Vector {
+struct CGUTILSSHARED_EXPORT Vector {
     double v[N];
 
     Vector();
@@ -258,7 +260,7 @@ template<size_t N>
 struct Matrix;
 
 template<size_t N>
-struct MatrixSlice {
+struct CGUTILSSHARED_EXPORT MatrixSlice {
     Matrix<N>& mat;
     size_t i = 0;
 
@@ -302,7 +304,7 @@ MatrixSlice<N>::operator Vector<N>() const {
 }
 
 template <size_t N>
-struct Matrix {
+struct CGUTILSSHARED_EXPORT Matrix {
     double m[N][N];
 
     Matrix();

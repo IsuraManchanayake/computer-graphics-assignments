@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <vector>
 
-#include "../Matrix/matrix.h"
+#include "matrix.h"
 
 using std::vector;
 using vec3 = Vector<3>;
