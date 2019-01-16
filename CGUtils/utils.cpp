@@ -8,6 +8,8 @@
 
 using std::vector;
 
+CGUTILS_NAMESPACE_BEGIN
+
 QPainter* init_painter(QWidget* w) {
     QPainter* painter = new QPainter(w);
     painter->setRenderHint(QPainter::HighQualityAntialiasing, true);
@@ -30,7 +32,15 @@ int rand_int(int x, int y) {
     return QRandomGenerator::global()->bounded(x, y);
 }
 
-void draw_lines(QPainter* painter, const vector<QPointF>& c) {
+QPointF flip_y(QPainter* painter, const QPointF& point) {
+    return QPointF(point.x(), painter->window().height() - point.y());
+}
+
+void draw_flipped_line(QPainter* painter, const QPointF& p1, const QPointF& p2) {
+    painter->drawLine(flip_y(painter, p1), flip_y(painter, p2));
+}
+
+void draw_lines(QPainter* painter, const vector<QPointF>& c, bool flipped) {
     painter->setPen(QPen(Qt::black, 2));
     int fh, fs, fl, th, ts, tl;
     fh = QRandomGenerator::global()->bounded(0, 180);
@@ -48,7 +58,39 @@ void draw_lines(QPainter* painter, const vector<QPointF>& c) {
         int l = static_cast<int>(fl + (2.0 * (tl - fl)) / (c.size() - 1) * ((i - 1 > (c.size() - 1) / 2) ? (c.size() - 1 - i) : (i - 1)));
 
         painter->setPen(QPen(QColor::fromHsl(h, s, l), 2));
-        painter->drawLine(c[i - 1], c[i]);
+        if(flipped) {
+            draw_flipped_line(painter, c[i - 1], c[i]);
+        } else {
+            painter->drawLine(c[i - 1], c[i]);
+        }
+    }
+}
+
+void draw_wireframe(QPainter* painter, const Triangle& tr) {
+    draw_shape(painter, std::begin(tr.tr), std::end(tr.tr));
+}
+
+void draw_wireframe(QPainter* painter, const Polygon& pol) {
+    for(const auto& tr : pol.trs) {
+        draw_wireframe(painter, tr);
+    }
+}
+
+void draw_wireframe(QPainter* painter, const Mesh& mesh) {
+    for(const auto& pol: mesh.pols) {
+        draw_wireframe(painter, pol);
+    }
+}
+
+void draw_shape(QPainter* painter, const vector<QPointF>& c, bool flipped) {
+    for(size_t i = 0; i < c.size(); i++) {
+        const QPointF& p1 = c[i];
+        const QPointF& p2 = c[(i + 1) % c.size()];
+        if(flipped) {
+            draw_flipped_line(painter, p1, p2);
+        } else {
+            painter->drawLine(p1, p2);
+        }
     }
 }
 
@@ -63,3 +105,5 @@ double map(double x, double a, double b, double p, double q) {
 QPointF ratio(const QPointF& p1, const QPointF& p2, double m, double n) {
     return (p1 * m + p2 * n) / (m + n);
 }
+
+CGUTILS_NAMESPACE_END

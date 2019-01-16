@@ -3,6 +3,7 @@
 #include "sierpinskitriangle.h"
 #include "ui_sierpinskitriangle.h"
 #include "utils.h"
+using namespace cgutils;
 
 SierpinskiTriangle::SierpinskiTriangle(QWidget *parent) :
     QMainWindow(parent),
@@ -50,7 +51,7 @@ void SierpinskiTriangle::paintEvent(QPaintEvent*) {
             next_iter();
         }
     }
-    draw_lines(painter, cs[max_iter - 1]);
+    draw_lines(painter, cs[max_iter - 1], false);
     delete painter;
 }
 

@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-01-07T12:59:13
+# Project created by QtCreator 2019-01-11T21:35:35
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Chaikin
+TARGET = camera-transform-1
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -22,15 +22,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-QMAKE_CXXFLAGS += -std=c++17
+CONFIG += c++14
 
 SOURCES += \
         main.cpp \
         mainwindow.cpp
+
 HEADERS += \
         mainwindow.h
+
 FORMS += \
         mainwindow.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
 
 Release:DESTDIR = ../build/release
 Release:OBJECTS_DIR = ../build/release/.obj
@@ -43,11 +50,6 @@ Debug:OBJECTS_DIR = ../build/debug/.obj
 Debug:MOC_DIR = ../build/debug/.moc
 Debug:RCC_DIR = ../build/debug/.rcc
 Debug:UI_DIR = ../build/debug/.ui
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build/release/ -lcg-utils
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build/debug/ -lcg-utils

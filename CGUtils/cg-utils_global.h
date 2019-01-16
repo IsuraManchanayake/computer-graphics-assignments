@@ -9,4 +9,7 @@
 #  define CGUTILSSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
+#define CGUTILS_NAMESPACE_BEGIN namespace cgutils {
+#define CGUTILS_NAMESPACE_END }
+
 #endif // CGUTILS_GLOBAL_H

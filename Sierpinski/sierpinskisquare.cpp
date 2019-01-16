@@ -3,6 +3,7 @@
 #include "sierpinskisquare.h"
 #include "ui_sierpinskisquare.h"
 #include "utils.h"
+using namespace cgutils;
 
 SierpinskiSquare::SierpinskiSquare(QWidget *parent) :
     QMainWindow(parent),
@@ -82,7 +83,7 @@ void SierpinskiSquare::compute_curve(void) {
 void SierpinskiSquare::paintEvent(QPaintEvent*) {
     QPainter* painter = init_painter(this);
     compute_curve();
-    draw_lines(painter, cs[max_iter - 1]);
+    draw_lines(painter, cs[max_iter - 1], false);
     delete painter;
 }
 

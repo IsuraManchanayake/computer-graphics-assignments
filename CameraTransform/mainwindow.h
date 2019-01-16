@@ -2,13 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <vector>
 
-#include "vector.h"
+#include "mesh.h"
 using namespace cgutils;
 
+#include <vector>
 using std::vector;
-using vec3 = Vector<3>;
 
 namespace Ui {
 class MainWindow;
@@ -23,13 +22,9 @@ public:
     ~MainWindow();
 protected:
     void paintEvent(QPaintEvent*);
-private slots:
-    void on_pushButton_clicked();
 private:
     Ui::MainWindow *ui;
-    vector<Vector<3>> points;
-
-    void init_curve(void);
+    Mesh mesh;
 };
 
 #endif // MAINWINDOW_H

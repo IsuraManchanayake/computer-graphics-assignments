@@ -2,13 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <vector>
 
-#include "vector.h"
+#include "triangle.h"
+#include "polygon.h"
 using namespace cgutils;
 
+#include <vector>
 using std::vector;
-using vec3 = Vector<3>;
 
 namespace Ui {
 class MainWindow;
@@ -24,12 +24,13 @@ public:
 protected:
     void paintEvent(QPaintEvent*);
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_pressed();
+
 private:
     Ui::MainWindow *ui;
-    vector<Vector<3>> points;
+    Polygon pol;
 
-    void init_curve(void);
+    void init_polygon(void);
 };
 
 #endif // MAINWINDOW_H

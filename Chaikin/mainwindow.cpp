@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "utils.h"
+using namespace cgutils;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
