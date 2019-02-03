@@ -8,7 +8,7 @@
 using namespace cgutils;
 
 using std::vector;
-using vec3 = Vector<3>;
+using vec3 = VectorBase<3>;
 
 namespace Ui {
 class MainWindow;
@@ -27,7 +27,7 @@ private slots:
     void on_pushButton_clicked();
 private:
     Ui::MainWindow *ui;
-    vector<Vector<3>> points;
+    vector<VectorBase<3>> points;
 
     void init_curve(void);
 };

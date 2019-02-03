@@ -18,8 +18,8 @@ struct CGUTILSSHARED_EXPORT Triangle {
     explicit Triangle(VecContainer tr);
     friend CGUTILSSHARED_EXPORT std::ostream& operator<<(std::ostream& os, const Triangle& tr);
     void print(std::ostream& os) const;
-    template<size_t N> Triangle operator*(const Matrix<N>&) const;
-    template<size_t N> Triangle& operator*=(const Matrix<N>&);
+    Triangle operator*(const Matrix<4>&) const;
+    Triangle& operator*=(const Matrix<4>&);
 
     array<Vector<4>, 3> tr;
 };
@@ -32,20 +32,6 @@ Triangle::Triangle(VecContainer tr) {
         std::transform(std::begin(tr), std::distance(std::begin(tr), std::end(tr)) > 3 ? std::next(std::begin(tr), 3) : std::end(tr),
                    std::begin(this->tr), [](const auto& v) -> Vector<4> { return static_cast<Vector<4>>(v); });
     }
-}
-
-template<size_t N>
-Triangle Triangle::operator*(const Matrix<N>& mat) const {
-    Triangle tr(*this);
-    for(auto& v: tr.tr) {
-        v *= mat;
-    }
-    return tr;
-}
-
-template<size_t N>
-Triangle& Triangle::operator*=(const Matrix<N>& mat) {
-    return *this = *this * mat;
 }
 
 CGUTILS_NAMESPACE_END

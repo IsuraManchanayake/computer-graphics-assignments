@@ -12,8 +12,7 @@ using std::pair;
 
 CGUTILS_NAMESPACE_BEGIN
 
-struct CGUTILSSHARED_EXPORT OptimalPolygonTriangulator
-{
+struct CGUTILSSHARED_EXPORT OptimalPolygonTriangulator {
     OptimalPolygonTriangulator();
     OptimalPolygonTriangulator(const vector<Vector<4>>& p);
     template<size_t N> OptimalPolygonTriangulator(const vector<Vector<N>>& p);

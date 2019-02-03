@@ -20,8 +20,8 @@ struct CGUTILSSHARED_EXPORT Polygon {
     template<typename VecContainer,
              typename = typename std::enable_if<is_container_of_vectors<VecContainer>::value>::type>
         static Polygon from_vecs(VecContainer vecs);
-    template<size_t N> Polygon operator*(const Matrix<N>&) const;
-    template<size_t N> Polygon& operator*=(const Matrix<N>&);
+    Polygon operator*(const Matrix<4>&) const;
+    Polygon& operator*=(const Matrix<4>&);
 
     vector<Triangle> trs;
     size_t size;
@@ -45,20 +45,6 @@ Polygon::Polygon(TriContainer trs, size_t size) : trs(trs.size()), size(size) {
 template<typename VecContainer, typename>
 Polygon Polygon::from_vecs(VecContainer vecs) {
     return Polygon { OptimalPolygonTriangulator(vecs).compute(), vecs.size() };
-}
-
-template<size_t N>
-Polygon Polygon::operator*(const Matrix<N>& mat) const {
-    Polygon p(*this);
-    for(auto& tr : p.trs) {
-        tr *= mat;
-    }
-    return p;
-}
-
-template<size_t N>
-Polygon& Polygon::operator*=(const Matrix<N>& mat) {
-    return *this = *this * mat;
 }
 
 CGUTILS_NAMESPACE_END

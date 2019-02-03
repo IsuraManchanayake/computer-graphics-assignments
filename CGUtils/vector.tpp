@@ -138,6 +138,16 @@ Vector<N>::operator Vector<M>() const {
 }
 
 template<size_t N>
+Vector<N> Vector<N>::cross(const Vector<N>& rhs) const {
+    static_assert(N == 3, "Cross product can be applied for 3d Vectors only");
+    return {
+        v[1] * rhs.v[2] - v[2] * rhs.v[1],
+       -v[0] * rhs.v[2] + v[2] * rhs.v[0],
+        v[0] * rhs.v[1] - v[1] * rhs.v[0]
+    };
+}
+
+template<size_t N>
 double Vector<N>::dot(const Vector<N>& rhs) const {
     double p = 0;
     for(size_t i = 0; i < N; i++) {

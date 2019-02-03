@@ -27,6 +27,7 @@ struct CGUTILSSHARED_EXPORT Vector {
     Vector<N> operator-(const Vector<N>& rhs) const;
     Vector<N> operator*(const double rhs) const;
     Vector<N> operator/(const double rhs) const;
+    Vector<N> cross(const Vector<N>& rhs) const;
     double dot(const Vector<N>& rhs) const;
     double norm(void) const;
     double dist(const Vector<N>& rhs) const;

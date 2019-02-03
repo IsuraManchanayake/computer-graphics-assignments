@@ -94,6 +94,22 @@ void draw_shape(QPainter* painter, const vector<QPointF>& c, bool flipped) {
     }
 }
 
+Matrix<4> translation_mat(double x, double y, double z) {
+    return Matrix<4>::traslation_mat({x, y, z, 1.0});
+}
+
+Matrix<4> scale_mat(double x, double y, double z) {
+    return Matrix<4>::scale_mat({x, y, z, 1.0});
+}
+
+Matrix<4> scale_mat(double f) {
+    return scale_mat(f, f, f);
+}
+
+//Matrix<4> rotation_mat(const Vector<4>& axis, double angle) {
+
+//}
+
 QPointF rotate_vec2(const QPointF& v, double t) {
     return QPointF(v.x() * cos(t) - v.y() * sin(t), v.x() * sin(t) + v.y() * cos(t));
 }

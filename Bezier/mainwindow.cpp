@@ -20,14 +20,14 @@ MainWindow::~MainWindow() {
 
 void MainWindow::init_curve(void) {
     points.clear();
-    vector<Vector<3>>& ps = points;
+    vector<VectorBase<3>>& ps = points;
     int cnt = 0;
     while(true) {
         start: {}
         cnt++;
         size_t num_curves = 2;
         for(size_t i = 0; i < 3 * num_curves + 1; i++) {
-            ps.push_back(Vector<3>({rand_int(100, 600), rand_int(100, 600), 1}));
+            ps.push_back(VectorBase<3>({rand_int(100, 600), rand_int(100, 600), 1}));
         }
 //        for(size_t i = 0; i < ps.size(); i++) {
 //            for(size_t j = i + 1; j < ps.size(); j++) {
@@ -40,8 +40,8 @@ void MainWindow::init_curve(void) {
 //            }
 //        }
         for(size_t i = 1; i < ps.size() - 1; i++) {
-            Vector<3> v1 = ps[i - 1] - ps[i];
-            Vector<3> v2 = ps[i + 1] - ps[i];
+            VectorBase<3> v1 = ps[i - 1] - ps[i];
+            VectorBase<3> v2 = ps[i + 1] - ps[i];
             double angle = v1.angle(v2);
             if(angle < M_PI / 6) {
                 ps.clear();
@@ -67,13 +67,13 @@ void MainWindow::paintEvent(QPaintEvent*) {
         painter->drawLine(p1, p2);
     }
 
-    vector<Vector<4>> cp;
+    vector<VectorBase<4>> cp;
     for(size_t i = 3; i < points.size(); i += 3) {
         Matrix<4> pmat({points[i - 3], points[i - 2], points[i - 1], points[i]});
         const Matrix<4> bmat({{1, 0, 0, 0}, {-3, 3, 0, 0}, {3, -6, 3, 0}, {-1, 3, -3, 1}});
         for(double t = 0; t <= 1.009; t += 0.01) {
-            Vector<4> tvec = Vector<4>::vec(1.0, t, t * t, t * t * t);
-            Vector<4> outv = tvec * bmat * pmat;
+            VectorBase<4> tvec = VectorBase<4>::vec(1.0, t, t * t, t * t * t);
+            VectorBase<4> outv = tvec * bmat * pmat;
             cp.push_back(outv);
         }
     }

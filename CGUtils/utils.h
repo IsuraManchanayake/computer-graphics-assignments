@@ -73,6 +73,11 @@ void CGUTILSSHARED_EXPORT draw_wireframe(QPainter*, const Triangle&);
 void CGUTILSSHARED_EXPORT draw_wireframe(QPainter*, const Polygon&);
 void CGUTILSSHARED_EXPORT draw_wireframe(QPainter*, const Mesh&);
 
+Matrix<4> CGUTILSSHARED_EXPORT translation_mat(double x, double y, double z);
+Matrix<4> CGUTILSSHARED_EXPORT scale_mat(double x, double y, double z);
+Matrix<4> CGUTILSSHARED_EXPORT scale_mat(double f);
+Matrix<4> CGUTILSSHARED_EXPORT rotation_mat(const Vector<4>& axis, double angle);
+
 CGUTILSSHARED_EXPORT double map(double, double, double, double, double);
 CGUTILSSHARED_EXPORT double rand_double(double x, double y);
 CGUTILSSHARED_EXPORT int rand_int(int x, int y);

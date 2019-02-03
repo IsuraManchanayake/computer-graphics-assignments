@@ -21,15 +21,15 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::init_polygon(void) {
-    vector<Vector<2>> c;
-    c.push_back(Vector<2>({200, 200}));
-    c.push_back(Vector<2>({150, 250}));
+    vector<VectorBase<2>> c;
+    c.push_back(VectorBase<2>({200, 200}));
+    c.push_back(VectorBase<2>({150, 250}));
 
     for(size_t i = 2; i < 10; i++) {
-        Vector<2> curr_v = (c[i - 1] - c[i - 2]).unit();
+        VectorBase<2> curr_v = (c[i - 1] - c[i - 2]).unit();
         double t = -(M_PI / 180) * rand_double(30, 42);
         Matrix<2> rotation({{cos(t), sin(t)}, {-sin(t), cos(t)}});
-        Vector<2> new_side = curr_v * rand_double(60, 90) * rotation;
+        VectorBase<2> new_side = curr_v * rand_double(60, 90) * rotation;
         c.push_back(c[i - 1] + new_side);
     }
     pol = Polygon::from_vecs(c);

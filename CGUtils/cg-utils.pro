@@ -34,7 +34,8 @@ SOURCES += \
     mesh.cpp \
     optimalpolygontriangulator.cpp \
     matrix.tpp \
-    vector.tpp
+    vector.tpp \
+    camera.cpp
 
 HEADERS += \
         cg-utils_global.h \
@@ -45,7 +46,8 @@ HEADERS += \
     mesh.h \
     optimalpolygontriangulator.h \
     traits.h \
-    vector.h
+    vector.h \
+    camera.h
 
 unix {
     target.path = /usr/lib
